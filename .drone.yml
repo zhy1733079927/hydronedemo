@@ -1,9 +1,27 @@
-kind: pipeline # 定义对象类型，还有secret和signature两种类型
-type: docker # 定义流水线类型，还有kubernetes、exec、ssh等类型
-name: jar-deploy # 定义流水线名称
-node:
-  name: centos-runner
+kind: pipeline
+type: docker
+name: default
+clone:
+  disable: true  #禁用默认克隆
+steps:
+  - name: clone-test
+    image: alpine/git
+    commands:
+      - git clone https://github.com/zhy1733079927/hydronedemo.git  #自定义克隆地址
+      - git version
 
+
+
+
+
+
+
+#kind: pipeline # 定义对象类型，还有secret和signature两种类型
+#type: docker # 定义流水线类型，还有kubernetes、exec、ssh等类型
+#name: jar-deploy # 定义流水线名称
+#node:
+#  name: centos-runner
+#
 #steps: # 定义流水线执行步骤，这些步骤将顺序执行
 #  - name: build-package # 流水线名称
 #    image: maven:3.8-openjdk-11 # 定义创建容器的Docker镜像
