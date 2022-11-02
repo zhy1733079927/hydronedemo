@@ -99,4 +99,4 @@ steps:
           -e TZ="Asia/Shanghai" \
           -v /etc/localtime:/etc/localtime \
           -d hy/drone-demo:latest
-        echo '----start container----'
+        - echo '----start container----'
