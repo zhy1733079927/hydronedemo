@@ -24,7 +24,17 @@ steps:
       - git version
       - ls
 
-
+  - name: build-package # 流水线名称
+    image: maven:3.8-openjdk-11 # 定义创建容器的Docker镜像
+    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
+      - name: maven-build
+        path: /drone/src/hydronedemo # 将应用打包好的Jar和执行脚本挂载出来
+    commands: # 定义在Docker容器中执行的shell命令
+      - cd hydronedemo/
+      - pwd
+      - ls
+      - mvn clean package # 应用打包命令
+      - ls
 
 
 
