@@ -3,12 +3,20 @@ type: docker
 name: default
 clone:
   disable: true  #禁用默认克隆
+
+volumes: # 定义流水线挂载目录，用于共享数据
+  - name: maven-build
+    host:
+      path: /goeasy1.4/source # 从宿主机中挂载的目录
+#  - name: maven-cache
+#    host:
+#      path: /root/docker/maven/cache
 steps:
   - name: clone-test
     image: alpine/git
     volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
       - name: maven-build
-        path: /dronedemo # 将应用打包好的Jar和执行脚本挂载出来
+        path: /source # 将应用打包好的Jar和执行脚本挂载出来
     commands:
       - cd /
       - mkdir source
@@ -61,10 +69,3 @@ steps:
 #      event:
 #        - push
 #
-volumes: # 定义流水线挂载目录，用于共享数据
-  - name: maven-build
-    host:
-      path: /goeasy1.4/source # 从宿主机中挂载的目录
-#  - name: maven-cache
-#    host:
-#      path: /root/docker/maven/cache
