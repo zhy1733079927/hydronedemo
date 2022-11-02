@@ -10,11 +10,11 @@ steps:
       - name: maven-build
         path: /dronedemo # 将应用打包好的Jar和执行脚本挂载出来
     commands:
-      - cd /
-      - mkdir source
-      - cd source/
+      - cd /source/
       - git clone https://github.com/zhy1733079927/hydronedemo.git  #自定义克隆地址
       - git version
+      - pwd
+      - ll
 
 
 
