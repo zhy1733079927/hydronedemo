@@ -73,5 +73,4 @@ steps:
         script:
           - cd /goeasy1.4/service/ # 进入宿主机构建目录
           - ls
-          - pkill -f 'java -jar'
           - nohup java -jar hydronedemo-0.0.1-SNAPSHOT.jar --server.port=8080 2>&1 &
