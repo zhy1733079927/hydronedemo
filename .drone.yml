@@ -16,10 +16,12 @@ steps:
     image: alpine/git
     volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
       - name: maven-build
-        path: /drone/src/ #将应用打包好的Jar和执行脚本挂载出来
+        path: /drone/src/source #将应用打包好的Jar和执行脚本挂载出来
     commands:
       - pwd
       - ls
+      - mkdir source
+      - cd source
       - git clone https://github.com/zhy1733079927/hydronedemo.git  #自定义克隆地址
       - git version
       - ls
