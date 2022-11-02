@@ -21,7 +21,7 @@ steps:
     commands:
       - pwd
       - ls
-      - cd source/hydronedemo/
+      - cd source
       - git clone https://github.com/zhy1733079927/hydronedemo.git  #自定义克隆地址
       - git version
       - ls
@@ -33,7 +33,7 @@ steps:
       - name: maven-build
         path: /drone/src/source # 将应用打包好的Jar和执行脚本挂载出来
     commands: # 定义在Docker容器中执行的shell命令
-      - cd source/
+      - cd source/hydronedemo/
       - pwd
       - ls
       - mvn clean package # 应用打包命令
