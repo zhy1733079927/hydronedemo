@@ -20,7 +20,6 @@ steps:
     commands:
       - pwd
       - ls
-      - rm -r hydronedemo/
       - git clone https://github.com/zhy1733079927/hydronedemo.git  #自定义克隆地址
       - git version
       - ls
