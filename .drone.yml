@@ -93,7 +93,7 @@ steps:
         - echo '----rm container----'
         - docker rmi hy/drone-demo:latest
         - echo '----rm image----'
-        - docker build -t hy/drone-demo:latest
+        - docker build -t hy/drone-demo:latest .
         - echo '----build image----'
         - docker run -p 8080:8080 --name drone-demo \
           -e TZ="Asia/Shanghai" \
