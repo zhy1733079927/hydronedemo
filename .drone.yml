@@ -11,6 +11,7 @@ volumes: # 定义流水线挂载目录，用于共享数据
 #  - name: maven-cache
 #    host:
 #      path: /root/docker/maven/cache
+
 steps:
   - name: clone-test
     image: alpine/git
