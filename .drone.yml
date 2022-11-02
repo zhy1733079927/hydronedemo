@@ -28,7 +28,7 @@ steps:
 
 
   - name: build-package # 流水线名称
-    image: neunnsy/maven3-jdk-8:v1.0.0 # 定义创建容器的Docker镜像
+    image: neunnsy/maven3-jdk-7:v1.0.0 # 定义创建容器的Docker镜像
     volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
       - name: maven-build
         path: /drone/src/source # 将应用打包好的Jar和执行脚本挂载出来
