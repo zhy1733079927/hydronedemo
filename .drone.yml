@@ -46,6 +46,7 @@ steps:
       - cd /drone/src/service
       - ls
 
+
   - name: deploy-start # 流水线名称
     image: openjdk:8u302-jre # 定义创建容器的Docker镜像
     volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
