@@ -54,7 +54,7 @@ steps:
     commands: # 定义在Docker容器中执行的shell命令
       - cp /drone/src/service/hydronedemo-0.0.1-SNAPSHOT.jar /drone/src/hydronedemo-0.0.1-SNAPSHOT.jar
       - cd /drone/src/service/
-      - rm -rf hydronedemo-0.0.1-SNAPSHOT.jar
+#      - rm -rf hydronedemo-0.0.1-SNAPSHOT.jar
       - cd ..
       - ls
       - nohup java -jar hydronedemo-0.0.1-SNAPSHOT.jar --server.port=3000 > log.output 2>&1 &
