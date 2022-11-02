@@ -52,12 +52,12 @@ steps:
       - name: maven-service
         path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
     commands: # 定义在Docker容器中执行的shell命令
-      - cp /drone/src/service/hydronedemo-0.0.1-SNAPSHOT.jar /drone/src/srchydronedemo-0.0.1-SNAPSHOT.jar
+      - cp /drone/src/service/hydronedemo-0.0.1-SNAPSHOT.jar /drone/src/hydronedemo-0.0.1-SNAPSHOT.jar
       - cd /drone/src/service/
       - rm -rf hydronedemo-0.0.1-SNAPSHOT.jar
       - cd ..
       - ls
-      - nohup Java -jar hydronedemo-0.0.1-SNAPSHOT.jar
+      - nohup java -jar --server.port=8080 hydronedemo-0.0.1-SNAPSHOT.jar > log.file 2>&1 &
       - ls
 
 
