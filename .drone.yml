@@ -8,9 +8,9 @@ volumes: # 定义流水线挂载目录，用于共享数据
   - name: maven-build
     host:
       path: /goeasy1.4/source/ # 从宿主机中挂载的目录
-#  - name: maven-cache
-#    host:
-#      path: /root/docker/maven/cache
+  - name: maven-service
+    host:
+      path: /goeasy1.4/service/
 
 steps:
   - name: clone-test
@@ -32,11 +32,18 @@ steps:
     volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
       - name: maven-build
         path: /drone/src/source # 将应用打包好的Jar和执行脚本挂载出来
+      - name: maven-service
+        path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
     commands: # 定义在Docker容器中执行的shell命令
       - cd source/hydronedemo/
       - pwd
       - ls
       - mvn clean package # 应用打包命令
+      - ls
+      - cp target/hydronedemo-0.0.1-SNAPSHOT.jar /drone/src/service/hydronedemo-0.0.1-SNAPSHOT.jar
+      - cd /drone/src/source/
+      - rm -rf hydronedemo/
+      - cd /drone/src/service
       - ls
 
 
