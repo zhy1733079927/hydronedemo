@@ -131,9 +131,9 @@ steps:
       script:
         - cd /goeasy1.4/service/ # 进入宿主机构建目录
         - ls
-        - docker stop docker-demos
+        - docker stop drone-demo
         - echo '----stop container----'
-        - docker rm docker-demos
+        - docker rm drone-demo
         - echo '----rm container----'
         - docker login ccr.ccs.tencentyun.com --username 100022818203 --password ys184aini
         - docker pull ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
