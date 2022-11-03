@@ -25,6 +25,9 @@ steps:
 
   - name: generate-docker
     image: plugins/docker:latest
+    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
+      - name: maven-service
+        path: /drone/src # 将应用打包好的Jar和执行脚本挂载出来
     settings:
         username:
           from_secret: docker_registry_username_tencent
