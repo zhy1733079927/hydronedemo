@@ -1,17 +1,37 @@
 kind: pipeline
 type: docker
 name: default
+#clone:
+#  disable: true  #禁用默认克隆
 
 volumes: # 定义流水线挂载目录，用于共享数据
+  - name: maven-build
+    host:
+      path: /goeasy1.4/source/ # 从宿主机中挂载的目录
   - name: maven-service
     host:
-      path: /goeasy1.4/
+      path: /goeasy1.4/service/
 
 steps:
-
+#  - name: clone-test
+#    image: alpine/git
+#    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
+#      - name: maven-build
+#        path: /drone/src/source #将应用打包好的Jar和执行脚本挂载出来
+#    commands:
+#      - pwd
+#      - ls
+#      - cd source
+#      - git clone https://github.com/zhy1733079927/hydronedemo.git  #自定义克隆地址
+#      - git version
+#      - ls
+#
+#
   - name: build-package # 流水线名称
     image: maven:3.6.3-openjdk-11 # 定义创建容器的Docker镜像
     volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
+      - name: maven-build
+        path: /drone/src/source # 将应用打包好的Jar和执行脚本挂载出来
       - name: maven-service
         path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
     commands: # 定义在Docker容器中执行的shell命令
@@ -20,20 +40,12 @@ steps:
       - ls
       - cp target/hydronedemo-0.0.1-SNAPSHOT.jar /drone/src/service/hydronedemo-0.0.1-SNAPSHOT.jar
       - cp Dockerfile /drone/src/service/Dockerfile
-      - cd /drone/src/service/
-      - ls
-
-  - name: generate-docker
-    image: plugins/docker:latest
-    settings:
-        username:
-          from_secret: docker_registry_username_tencent
-        password:
-          from_secret: docker_registry_password_tencent
-        repo: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos
-        tags: latest
-        registry: ccr.ccs.tencentyun.com
-
+#      - cd /drone/src/source/
+#      - rm -rf hydronedemo/
+#      - cd /drone/src/service
+#      - ls
+#
+#
 #  - name: deploy-start # 流水线名称
 #    image: openjdk:8u302-jre # 定义创建容器的Docker镜像
 #    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
