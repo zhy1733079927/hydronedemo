@@ -43,7 +43,6 @@ steps:
       port: 22 # 远程连接端口
       command_timeout: 5m # 远程执行命令超时时间
       script:
-        - cd /goeasy1.4/service/ # 进入宿主机构建目录
         - ls
         - docker stop drone-demo
         - echo '----stop container----'
