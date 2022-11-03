@@ -33,9 +33,6 @@ steps:
         repo: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos
         tags: latest
         registry: ccr.ccs.tencentyun.com
-    volumes:
-      - name: maven-service
-        path: /drone/src/service
 
   - name: deploy-start
     image: appleboy/drone-ssh # SSH工具镜像
