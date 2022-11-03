@@ -43,6 +43,7 @@ steps:
       port: 22 # 远程连接端口
       command_timeout: 5m # 远程执行命令超时时间
       script:
+        - cd /goeasy1.4/
         - ls
         - pwd
         - docker stop drone-demo
