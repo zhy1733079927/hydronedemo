@@ -96,7 +96,7 @@ steps:
         - docker build -t hy/drone-demo:latest .
         - echo '----build image----'
         - docker run \
-          --publish=8080:8080 \
-          --name=drone-demo \
+          -publish=8080:8080 \
+          -name=drone-demo \
           hy/drone-demo:latest
         - echo '----start container----'
