@@ -95,8 +95,5 @@ steps:
         - echo '----rm image----'
         - docker build -t hy/drone-demo:latest .
         - echo '----build image----'
-        - docker run \
-          -publish=8080:8080 \
-          -name=drone-demo \
-          hy/drone-demo:latest
+        - docker run -p 8080:8080 --name drone-demo hy/drone-demo:latest
         - echo '----start container----'
