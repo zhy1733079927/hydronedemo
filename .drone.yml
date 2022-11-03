@@ -44,6 +44,7 @@ steps:
       command_timeout: 5m # 远程执行命令超时时间
       script:
         - ls
+        - pwd
         - docker stop drone-demo
         - echo '----stop container----'
         - docker rm drone-demo
