@@ -8,6 +8,8 @@ ENV PROFILES druid
 ENV LANG en_US.UTF-8
 #添加环境变量 服务虚拟机参数设定
 ENV JAVA_OPTS "-Xms500m -Xmx1024m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=256m"
+PWD
+LS
 #根据dockerfile所放的位置将jar包copy至容器中的目标位置
 COPY hydronedemo-0.0.1-SNAPSHOT.jar /hydronedemo-0.0.1-SNAPSHOT.jar
 #执行命令 该命令就是在容器中运行java工程的命令
