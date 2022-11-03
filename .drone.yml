@@ -109,10 +109,6 @@ steps:
       script:
         - cd /goeasy1.4/service/ # 进入宿主机构建目录
         - ls
-        - docker stop drone-demo
-        - echo '----stop container----'
-        - docker rm drone-demo
-        - echo '----rm container----'
         - docker rmi hy/drone-demo:latest
         - echo '----rm image----'
         - docker build -t hy/drone-demo:latest .
@@ -121,26 +117,25 @@ steps:
         - docker push ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
         - echo '----push image----'
         - docker rmi ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
+        - docker rmi hy/drone-demo:latest
         - echo '----remove image----'
 
-#  - name: deploy-start
-#    image: appleboy/drone-ssh # SSH工具镜像
-#    settings:
-#      host: 47.52.141.48 # 远程连接地址
-#      username: root # 远程连接账号
-#      password: Uwant123!
-#      port: 22 # 远程连接端口
-#      command_timeout: 5m # 远程执行命令超时时间
-#      script:
-#        - cd /goeasy1.4/service/ # 进入宿主机构建目录
-#        - ls
-#        - docker stop drone-demo
-#        - echo '----stop container----'
-#        - docker rm drone-demo
-#        - echo '----rm container----'
-#        - docker rmi hy/drone-demo:latest
-#        - echo '----rm image----'
-#        - docker build -t hy/drone-demo:latest .
-#        - echo '----build image----'
-#        - docker run -p 8080:8080 --name drone-demo hy/drone-demo:latest
-#        - echo '----start container----'
+  - name: deploy-start
+    image: appleboy/drone-ssh # SSH工具镜像
+    settings:
+      host: 47.52.141.48 # 远程连接地址
+      username: root # 远程连接账号
+      password: Uwant123!
+      port: 22 # 远程连接端口
+      command_timeout: 5m # 远程执行命令超时时间
+      script:
+        - cd /goeasy1.4/service/ # 进入宿主机构建目录
+        - ls
+        - docker stop docker-demos
+        - echo '----stop container----'
+        - docker rm docker-demos
+        - echo '----rm container----'
+        - docker login ccr.ccs.tencentyun.com --username 100022818203 --password ys184aini
+        - docker pull ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
+        - docker run -p 8080:8080 --name drone-demo ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
+        - echo '----start container----'
