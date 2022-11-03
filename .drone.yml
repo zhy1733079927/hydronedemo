@@ -118,9 +118,9 @@ steps:
         - docker build -t hy/drone-demo:latest .
         - docker login ccr.ccs.tencentyun.com --username 100022818203 --password ys184aini
         - docker tag hy/drone-demo:latest ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
-        - docker push ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:last
+        - docker push ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
         - echo '----push image----'
-        - docker rmi ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:last
+        - docker rmi ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
         - echo '----remove image----'
 
 #  - name: deploy-start
