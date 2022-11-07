@@ -51,10 +51,6 @@ steps:
       tags: latest
       registry: ccr.ccs.tencentyun.com
       context: /drone/src/service
-#    commands: # 定义在Docker容器中执行的shell命令
-#      - ls
-#      - cd /drone/src/service
-#      - ls
 
 #  - name: generate-docker
 #    image: plugins/docker:latest
