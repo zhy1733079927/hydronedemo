@@ -38,7 +38,7 @@ steps:
   - name: deploy-start
     image: appleboy/drone-ssh # SSH工具镜像
     settings:
-      host: 47.52.141.48 # 远程连接地址
+      host: 8.218.102.216 # 远程连接地址
       username: root # 远程连接账号
       password: Uwant123!
       port: 22 # 远程连接端口
