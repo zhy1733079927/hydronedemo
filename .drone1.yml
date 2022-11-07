@@ -95,6 +95,17 @@ steps:
 #        - echo '----build image----'
 #        - docker run -p 8080:8080 --name drone-demo hy/drone-demo:latest
 #        - echo '----start container----'
+#  - name: generate-docker
+#    image: plugins/docker:latest
+#    settings:
+#        username:
+#          from_secret: docker_registry_username_tencent
+#        password:
+#          from_secret: docker_registry_password_tencent
+#        repo: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos
+#        tags: latest
+#        registry: ccr.ccs.tencentyun.com
+
 
 #  - name: deploy-push
 #    image: appleboy/drone-ssh # SSH工具镜像

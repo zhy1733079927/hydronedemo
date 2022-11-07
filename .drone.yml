@@ -12,14 +12,6 @@ volumes: # 定义流水线挂载目录，用于共享数据
 
 steps:
 
-#  - name: test
-#    image: maven:3-jdk-10
-#    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
-#      - name: maven-service
-#        path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
-#    commands:
-#      - mvn deploy
-
   - name: build-package # 流水线名称
     image: maven:3.6.3-openjdk-11 # 定义创建容器的Docker镜像
     volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
@@ -52,24 +44,17 @@ steps:
       registry: ccr.ccs.tencentyun.com
       context: /drone/src/service
 
-#  - name: generate-docker
-#    image: plugins/docker:latest
-#    settings:
-#        username:
-#          from_secret: docker_registry_username_tencent
-#        password:
-#          from_secret: docker_registry_password_tencent
-#        repo: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos
-#        tags: latest
-#        registry: ccr.ccs.tencentyun.com
-
   - name: deploy-start
     image: appleboy/drone-ssh # SSH工具镜像
     settings:
-      host: 8.218.102.216 # 远程连接地址
-      username: root # 远程连接账号
-      password: Uwant123!
-      port: 22 # 远程连接端口
+      host:
+        from_secret: ssh_host
+      username:
+        from_secret: ssh_username
+      password:
+        from_secret: ssh_password
+      port:
+        from_secret: ssh_port
       command_timeout: 5m # 远程执行命令超时时间
       script:
         - cd /goeasy1.4/
@@ -77,7 +62,7 @@ steps:
         - echo '----stop container----'
         - docker rm drone-demo
         - echo '----rm container----'
-        - docker login ccr.ccs.tencentyun.com --username 100022818203 --password ys184aini
+        - docker login ccr.ccs.tencentyun.com --username=${docker_registry_username_tencent} --password=${docker_registry_password_tencent}
         - docker pull ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
         - docker run -p 8080:8080 --name drone-demo ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
         - echo '----start container1----'
