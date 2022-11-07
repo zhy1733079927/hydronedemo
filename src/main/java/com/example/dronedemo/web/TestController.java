@@ -15,7 +15,7 @@ public class TestController {
     @GetMapping(value = "/helloworld")
     protected String messageCallback(String data, HttpServletResponse response) throws Exception {
         PrintWriter out = response.getWriter();
-        out.print("hello world JJHJ: " + data);
+        out.print("hello world KKK: " + data);
         out.flush();
         return null;
     }
