@@ -54,4 +54,4 @@ steps:
         - docker login ccr.ccs.tencentyun.com --username 100022818203 --password ys184aini
         - docker pull ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
         - docker run -p 8080:8080 --name drone-demo ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
-        - echo '----start container----'
+        - echo '----start container1----'
