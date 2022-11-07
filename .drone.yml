@@ -6,6 +6,9 @@ volumes: # 定义流水线挂载目录，用于共享数据
   - name: maven-service
     host:
       path: /goeasy1.4/
+  - name: docker
+    host:
+      path: /var/run/docker.sock
 
 steps:
 
@@ -33,9 +36,11 @@ steps:
 
   - name: build-docker # 流水线名称
     image: plugins/docker:latest
-#    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
-#      - name: maven-service
-#        path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
+    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
+      - name: maven-service
+        path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
+      - name: docker
+        path: /var/run/docker.sock # 挂载宿主机的docker
     settings:
       username:
         from_secret: docker_registry_username_tencent
