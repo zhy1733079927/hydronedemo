@@ -23,6 +23,7 @@ steps:
 #      - cd /drone/src/service/
 #      - ls
 
+
   - name: generate-docker
     image: plugins/docker:latest
     settings:
