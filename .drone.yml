@@ -27,23 +27,44 @@ steps:
       - cd /drone/src/service/
       - ls
 
-#  - name: build-docker # 流水线名称
-#    image: plugins/docker:latest
-#    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
-#      - name: maven-service
-#        path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
-#      - name: docker
-#        path: /var/run/docker.sock # 挂载宿主机的docker
-#    settings:
-#      username:
-#        from_secret: docker_registry_username_tencent
-#      password:
-#        from_secret: docker_registry_password_tencent
-#      dockerfile: /drone/src/service/Dockerfile
-#      repo: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos
-#      tags: latest
-#      registry: ccr.ccs.tencentyun.com
-#      context: /drone/src/service
+  - name: build-docker # 流水线名称
+    image: plugins/docker:latest
+    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
+      - name: maven-service
+        path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
+      - name: docker
+        path: /var/run/docker.sock # 挂载宿主机的docker
+    settings:
+      username:
+        from_secret: docker_registry_username_tencent
+      password:
+        from_secret: docker_registry_password_tencent
+      dockerfile: /drone/src/service/Dockerfile
+      repo: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos
+      tags: latest
+      registry: ccr.ccs.tencentyun.com
+      context: /drone/src/service
+
+  - name: deploy-start
+    image: appleboy/drone-ssh # SSH工具镜像
+    settings:
+      host:
+        from_secret: ssh_host
+      username:
+        from_secret: ssh_username
+      password:
+        from_secret: ssh_password
+      port:
+        from_secret: ssh_port
+      command_timeout: 5m # 远程执行命令超时时间
+      script:
+        - cd /goeasy1.4/
+        - docker stop drone-demo
+        - echo '----stop container----'
+        - docker rm drone-demo
+        - echo '----rm container----'
+        - docker-compose up -d
+        - echo '----start container1----'
 
 #  - name: deploy-start
 #    image: appleboy/drone-ssh # SSH工具镜像
