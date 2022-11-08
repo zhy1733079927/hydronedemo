@@ -1,5 +1,7 @@
+version: "3.0"
+
 services:
-  drone-demo:
+  drone-demo3:
     image: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
     ports:
       - 8080:8080
