@@ -59,13 +59,17 @@ steps:
       command_timeout: 5m # 远程执行命令超时时间
       script:
         - cd /goeasy1.4/
-        - docker stop drone-demo
-        - echo '----stop container----'
-        - docker rm drone-demo
-        - echo '----rm container----'
-        - docker-compose up -d
-        - echo '----start container1----'
-
+        - docker service rm drone-demo2
+        - echo '----rm service----'
+        - docker login ccr.ccs.tencentyun.com --username=${docker_registry_username_tencent} --password=${docker_registry_password_tencent}
+        - docker service create --with-registry-auth --publish 8080:8080 --name drone-demo2 ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
+        - echo '----start service----'
+        - echo '----docker service ps----'
+        - docker service ps drone-demo2
+        - echo '----docker service ls----'
+        - docker service ls
+        - echo '----docker node ls----'
+        - docker node ls
 #  - name: deploy-start
 #    image: appleboy/drone-ssh # SSH工具镜像
 #    settings:
