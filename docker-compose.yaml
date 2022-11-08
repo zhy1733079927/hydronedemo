@@ -2,4 +2,4 @@ services:
   drone-demoA:
     image: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
     ports:
-      - "8080:8080"
+      - 8080
