@@ -56,6 +56,10 @@ steps:
         from_secret: ssh_password
       port:
         from_secret: ssh_port
+      docker_registry_username_tencent:
+        from_secret: docker_registry_username_tencent
+      docker_registry_password_tencent:
+        from_secret: docker_registry_password_tencent
       command_timeout: 5m # 远程执行命令超时时间
       script:
         - cd /goeasy1.4/
