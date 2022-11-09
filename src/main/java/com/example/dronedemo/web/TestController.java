@@ -21,7 +21,7 @@ public class TestController {
     protected String messageCallback(String data, HttpServletResponse response) throws Exception {
         PrintWriter out = response.getWriter();
         String hostAddress = getInet4Address();// 获得本机的IP地址
-        out.print("hello world[" + hostAddress + "] IOP: " + data);
+        out.print("hello world[" + hostAddress + "] RST: " + data);
         out.flush();
         return null;
     }
