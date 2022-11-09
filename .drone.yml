@@ -65,9 +65,9 @@ steps:
         - cd /goeasy1.4/
         - echo '----rm service----'
         - docker login ccr.ccs.tencentyun.com --username 100022818203 --password ys184aini
-        - docker service create --with-registry-auth --publish 8080:8080 --replicas=3 --name drone-demo2 ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
+        - docker service create --with-registry-auth --publish 8080:8080 --replicas=6 --name drone-demo2 ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
 #        - docker stack deploy --with-registry-auth --compose-file /goeasy1.4/docker-compose.yaml drone-demo3
-        - echo '----start service----'
+        - echo '----start service ${docker_registry_password_tencent}----'
         - echo '----docker service ps----'
         - docker service ps drone
         - echo '----docker service ls----'
