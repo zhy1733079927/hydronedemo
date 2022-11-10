@@ -26,7 +26,7 @@ steps:
       - cp docker-compose.yaml /drone/src/service/docker-compose.yaml
       - cd /drone/src/service/
       - ls
-#
+
 #  - name: deploy-start
 #    image: appleboy/drone-ssh # SSH工具镜像
 #    settings:
@@ -49,53 +49,53 @@ steps:
 #        - docker service create --with-registry-auth --publish 8080:8080 --replicas=4 --name drone-demo hy/drone-demo:latest
 #        - echo '----start container----'
 
-#  - name: build-docker # 流水线名称
-#    image: plugins/docker:latest
-#    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
-#      - name: maven-service
-#        path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
-#      - name: docker
-#        path: /var/run/docker.sock # 挂载宿主机的docker
-#    settings:
-#      username:
-#        from_secret: docker_registry_username_tencent
-#      password:
-#        from_secret: docker_registry_password_tencent
-#      dockerfile: /drone/src/service/Dockerfile
-#      repo: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos
-#      tags: latest
-#      registry: ccr.ccs.tencentyun.com
-#      context: /drone/src/service
-#
-#  - name: deploy-start
-#    image: appleboy/drone-ssh # SSH工具镜像
-#    settings:
-#      host:
-#        from_secret: ssh_host
-#      username:
-#        from_secret: ssh_username
-#      password:
-#        from_secret: ssh_password
-#      port:
-#        from_secret: ssh_port
-#      docker_registry_username_tencent:
-#        from_secret: docker_registry_username_tencent
-#      docker_registry_password_tencent:
-#        from_secret: docker_registry_password_tencent
-#      command_timeout: 5m # 远程执行命令超时时间
-#      script:
-#        - cd /goeasy1.4/
-#        - echo '----rm service----'
-#        - docker login ccr.ccs.tencentyun.com --username 100022818203 --password ys184aini
-#        - docker service create --with-registry-auth --publish 8080:8080 --replicas=4 --name drone-demo2 ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
-##        - docker stack deploy --with-registry-auth --compose-file /goeasy1.4/docker-compose.yaml drone-demo3
-#        - echo '----start service A${docker_registry_password_tencent}A----'
-#        - echo '----docker service ps----'
-#        - docker service ps drone
-#        - echo '----docker service ls----'
-#        - docker service ls
-#        - echo '----docker node ls----'
-#        - docker node ls
+  - name: build-docker # 流水线名称
+    image: plugins/docker:latest
+    volumes: # 将容器内目录挂载到宿主机，仓库需要开启Trusted设置
+      - name: maven-service
+        path: /drone/src/service # 将应用打包好的Jar和执行脚本挂载出来
+      - name: docker
+        path: /var/run/docker.sock # 挂载宿主机的docker
+    settings:
+      username:
+        from_secret: docker_registry_username_tencent
+      password:
+        from_secret: docker_registry_password_tencent
+      dockerfile: /drone/src/service/Dockerfile
+      repo: ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos
+      tags: latest
+      registry: ccr.ccs.tencentyun.com
+      context: /drone/src/service
+
+  - name: deploy-start
+    image: appleboy/drone-ssh # SSH工具镜像
+    settings:
+      host:
+        from_secret: ssh_host
+      username:
+        from_secret: ssh_username
+      password:
+        from_secret: ssh_password
+      port:
+        from_secret: ssh_port
+      docker_registry_username_tencent:
+        from_secret: docker_registry_username_tencent
+      docker_registry_password_tencent:
+        from_secret: docker_registry_password_tencent
+      command_timeout: 5m # 远程执行命令超时时间
+      script:
+        - cd /goeasy1.4/
+        - echo '----rm service----'
+        - docker login ccr.ccs.tencentyun.com --username 100022818203 --password ys184aini
+        - docker service create --with-registry-auth --publish 8080:8080 --replicas=4 --name drone-demo2 ccr.ccs.tencentyun.com/hy-docker-demos/docker-demos:latest
+#        - docker stack deploy --with-registry-auth --compose-file /goeasy1.4/docker-compose.yaml drone-demo3
+        - echo '----start service A${docker_registry_password_tencent}A----'
+        - echo '----docker service ps----'
+        - docker service ps drone
+        - echo '----docker service ls----'
+        - docker service ls
+        - echo '----docker node ls----'
+        - docker node ls
 
 #  - name: deploy-start
 #    image: appleboy/drone-ssh # SSH工具镜像
